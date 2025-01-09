@@ -4,173 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recipe Management Dashboard</title>
-  <style>
-    /* General Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f6f9f8;
-      color: #333;
-    }
-
-    /* Topbar Styles */
-    .topbar {
-      background-color: #edf4ef;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .topbar h1 {
-      font-size: 1.5em;
-      color: #28a745;
-    }
-
-    .search-bar {
-      flex-grow: 1;
-      margin: 0 20px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .search-bar input[type="text"] {
-      width: 60%;
-      padding: 10px;
-      font-size: 1em;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .topbar nav {
-      display: flex;
-      gap: 20px;
-    }
-
-    .topbar nav a {
-      text-decoration: none;
-      color: #333;
-      font-size: 1em;
-    }
-
-    .topbar nav a:hover {
-      color: #28a745;
-    }
-
-    /* Main Content */
-    .main-content {
-      padding: 20px;
-    }
-
-    .banner {
-      background-color: #e8f5e9;
-      padding: 20px;
-      border-radius: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .banner .text {
-      max-width: 60%;
-    }
-
-    .banner h2 {
-      font-size: 2.5em;
-      color: #28a745;
-    }
-
-    .banner p {
-      margin: 10px 0;
-      color: #666;
-    }
-
-    .banner img {
-      max-width: 50%;
-      border-radius: 10px;
-    }
-
-    /* Categories Section */
-    .categories {
-      margin-top: 20px;
-    }
-
-    .categories h3 {
-      margin-bottom: 10px;
-      font-size: 1.5em;
-      color: #333;
-    }
-
-    .categories-list {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .category {
-      flex: 1;
-      background-color: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .category h3 {
-      margin-bottom: 10px;
-      color: #28a745;
-    }
-
-    .category ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .category ul li {
-      margin: 5px 0;
-      color: #555;
-    }
-
-    .category ul li:hover {
-      color: #28a745;
-      cursor: pointer;
-    }
-
-    .add-recipe-btn {
-      margin-top: 15px;
-      padding: 10px 20px;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-    }
-
-    .add-recipe-btn:hover {
-      background-color: #218838;
-    }
-	.add-recipe-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #218838;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.add-recipe-btn:hover {
-    background-color: #gray;
-}
-
-
-  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
   <!-- Topbar -->
@@ -180,9 +15,7 @@
       <input type="text" placeholder="Search recipes...">
     </div>
     <nav>
-      <a href="#">Recipes</a>
-      <a href="add_edit_entry.html">Add Recipe</a>
-      <a href="#">About Us</a>
+      <a class="nav-link" id="nav-add-recipe" href="#">Add Recipe</a>
     </nav>
   </header>
 
@@ -197,40 +30,113 @@
       <img src="images/banner-pic.webp" alt="Delicious Food" height="300" width="500">
     </div>
 
-    <!-- Categories -->
-    <section class="categories">
-      <h3>Categories</h3>
-      <div class="categories-list">
-        <!-- Breakfast -->
-        <div class="category">
-          <h3>Breakfast</h3>
-          <ul>
-            <li>#</li>
-          </ul>
-          <a href="add_edit_entry.html" class="add-recipe-btn">Add Recipe</a>
+    <!-- Add Recipe Form -->
+    <div id="add-recipe-form-container" class="mt-4">
+      <h3>Add a New Recipe</h3>
+      <form id="recipe-form" class="row g-3">
+        <!-- Recipe Name -->
+        <div class="col-md-6">
+          <label for="recipe-name" class="form-label">Recipe Name</label>
+          <input type="text" id="recipe-name" class="form-control" placeholder="Enter recipe name" required>
+        </div>
 
+        <!-- Description -->
+        <div class="col-md-12">
+          <label for="recipe-description" class="form-label">Description</label>
+          <textarea id="recipe-description" class="form-control" rows="3" placeholder="Enter a short description of the recipe" required></textarea>
+        </div>
+
+        <!-- Ingredients -->
+        <div class="col-md-12">
+          <label for="recipe-ingredients" class="form-label">Ingredients</label>
+          <textarea id="recipe-ingredients" class="form-control" rows="3" placeholder="List the ingredients" required></textarea>
+        </div>
+
+        <!-- Cooking Steps -->
+        <div class="col-md-12">
+          <label for="recipe-steps" class="form-label">Cooking Steps</label>
+          <textarea id="recipe-steps" class="form-control" rows="5" placeholder="List the cooking steps" required></textarea>
+        </div>
+
+        <!-- Category -->
+        <div class="col-md-6">
+          <label for="category" class="form-label">Category</label>
+          <select id="category" class="form-select" required>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+          </select>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="col-12">
+          <button type="submit" class="btn btn-success">Add Recipe</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Categories -->
+    <div class="mt-5">
+      <h3>Categories</h3>
+      <div class="row">
+        <!-- Breakfast -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header text-white bg-success">Breakfast</div>
+            <div class="card-body category-list" id="Breakfast">
+              <ul class="list-group"></ul>
+            </div>
+          </div>
         </div>
         <!-- Lunch -->
-        <div class="category">
-          <h3>Lunch</h3>
-          <ul>
-            <li>#</li>
-            <li>#</li>
-            <li>#</li>
-          </ul>
-		  <a href="add_edit_entry.html" class="add-recipe-btn">Add Recipe</a>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header text-white bg-success">Lunch</div>
+            <div class="card-body category-list" id="Lunch">
+              <ul class="list-group"></ul>
+            </div>
+          </div>
         </div>
         <!-- Dinner -->
-        <div class="category">
-          <h3>Dinner</h3>
-          <ul>
-            <li>#</li>
-          <li>#</li>
-          </ul>
-		  <a href="add_edit_entry.html" class="add-recipe-btn">Add Recipe</a>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header text-white bg-success">Dinner</div>
+            <div class="card-body category-list" id="Dinner">
+              <ul class="list-group"></ul>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </div>
+  <!-- Recipe Details Modal -->
+<div class="modal fade" id="recipeDetailsModal" tabindex="-1" aria-labelledby="recipeDetailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="recipeDetailsModalLabel">Recipe Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4 id="modal-recipe-name" class="text-success"></h4>
+        <p><strong>Description:</strong> <span id="modal-recipe-description"></span></p>
+        <p><strong>Ingredients:</strong></p>
+        <ul id="modal-recipe-ingredients"></ul>
+        <p><strong>Cooking Steps:</strong></p>
+        <ol id="modal-recipe-steps"></ol>
+      </div>
+      <div class="modal-footer">
+        <button id="edit-recipe" type="button" class="btn btn-primary">Edit</button>
+        <button id="delete-recipe" type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/dashboard.js"></script>
 </body>
 </html>
